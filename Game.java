@@ -8,16 +8,8 @@ import java.awt.event.WindowEvent;
 import java.awt.Color;
 import java.awt.Font;
 
-public class Game {
-     public static void main(String[] args) {
-      System.out.println("hello world");
-      System.out.println("Hey nicol!");
-      System.out.println("hi donny!");
-      System.out.println();
-     }
-}
 
-public class Drawing extends Canvas {
+public class Game extends Canvas {
     public static void main(String[] args) {
         JFrame frame = new JFrame("My Drawing");
         Canvas canvas = new Drawing();
