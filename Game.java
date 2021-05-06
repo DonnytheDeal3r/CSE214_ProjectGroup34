@@ -1,9 +1,6 @@
-//druk space om game te begin en q dan close window sover is a en d links en regs.
-
-
 public class Bravo{
   
-  boolean gamePlay = false;
+  static boolean gamePlay = false;
   static double x = 400.0;
   
   public static void Menu(){
@@ -27,18 +24,21 @@ public class Bravo{
     StdDraw.setPenColor(StdDraw.RED);
     StdDraw.filledSquare(x, 0.0,20.0);
    
-   
-   for (int row = 0; row < 5 ; row++) {
-     for (int col =0 ; col < 12 ; col++) {
-       StdDraw.filledCircle(100+(col*50),(400)+row*30,10);
-     }
-   }
-   
-
-   
    StdDraw.setPenColor(StdDraw.BLUE);
    StdDraw.text(25,580.0, "Score:");
    StdDraw.show();
+  }
+  public static void drawAlien(double x, double y){
+    for (int row = 0; row < 3 ; row++) {
+     for (int col =0 ; col < 6 ; col++) {
+       StdDraw.filledCircle(x+(col*50),(y)+row*30,10);
+       StdDraw.show();
+
+      
+     }
+   }
+  
+  
   }
 
   public static void gameLoop(){
@@ -46,28 +46,64 @@ public class Bravo{
    System.out.print("Game");
     drawGame();
    char a = 0;
-   
+   double moveX = 100;
+   double moveY = 100;
+   double cx = 10;
     while(a != 'q'){
+      
+      moveX += cx;
+      drawAlien(moveX, moveY);
+      StdDraw.pause(250);
+      StdDraw.clear(StdDraw.GRAY);
+      drawGame();
+      StdDraw.show();
+      
+      if(moveX == 530){
+        moveY -= 50;
+        cx = -10;
+      }
+      if(moveX == 30){
+        moveY -= 50;
+        cx = 10;
+      }
     if (StdDraw.hasNextKeyTyped()) {
         a = StdDraw.nextKeyTyped();
          if(a == 'q'){
       System.exit(0);
-    } if(a == 'a'){
+    } 
+         
+         if(moveY<100){
+           endGame();
+            System.exit(0);
+         }      
+         
+         if(a == 'a'){
+           if(x>10){
       x -= 10.0;
       StdDraw.clear(StdDraw.GRAY);
       drawGame();
       StdDraw.show();
-    }if(a == 'd'){
+    }
+         }
+         
+         if(a == 'd'){
+           if(x<790){
       x += 10.0;
       StdDraw.clear(StdDraw.GRAY);
       drawGame();
       StdDraw.show();
-    } 
+           }
         }
-   
-   
     }  
-   
+  }
+  }
+  
+  public static void endGame(){
+    StdDraw.clear(StdDraw.GRAY);
+    Menu();
+    StdDraw.show();
+  
+  
   }
   
   public static void main(String[] args){
@@ -78,6 +114,7 @@ public class Bravo{
     while(c != ' '){
     if (StdDraw.hasNextKeyTyped()) {
         c = StdDraw.nextKeyTyped();
+        gamePlay = true;
         }
     }  
     gameLoop();
