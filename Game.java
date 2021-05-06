@@ -1,7 +1,11 @@
 public class Bravo{
   
+  //druk space om te begin, q om window te close , a en d vir link en regs en dan z en c om te rotate
+  
+  
   static boolean gamePlay = false;
   static double x = 400.0;
+  static double z = 0;
   
   public static void Menu(){
   StdDraw.setCanvasSize(800,600);
@@ -9,6 +13,7 @@ public class Bravo{
   StdDraw.setYscale(0,600);
   StdDraw.clear(StdDraw.GRAY);
   StdDraw.setPenColor(StdDraw.YELLOW);
+  
   
   StdDraw.text(400.0,300.0, "Shoot(w)");
   StdDraw.text(400.0,270.0, "Rotate: Left(a), Stop(s), Right(d)");
@@ -22,7 +27,7 @@ public class Bravo{
     
     StdDraw.clear(StdDraw.GRAY);
     StdDraw.setPenColor(StdDraw.RED);
-    StdDraw.filledSquare(x, 0.0,20.0);
+    StdDraw.picture(x, 15.0 ,"ship.gif",z);
    
    StdDraw.setPenColor(StdDraw.BLUE);
    StdDraw.text(25,580.0, "Score:");
@@ -32,9 +37,7 @@ public class Bravo{
     for (int row = 0; row < 3 ; row++) {
      for (int col =0 ; col < 6 ; col++) {
        StdDraw.filledCircle(x+(col*50),(y)+row*30,10);
-       StdDraw.show();
-
-      
+       StdDraw.picture(x+(col*50),(y)+row*30,"Alien.gif");
      }
    }
   
@@ -44,26 +47,33 @@ public class Bravo{
   public static void gameLoop(){
     
    System.out.print("Game");
-    drawGame();
+   drawGame();
    char a = 0;
    double moveX = 100;
    double moveY = 100;
    double cx = 10;
+   int count = 0;
+  
+   
+    while(count!=1){
     while(a != 'q'){
       
       moveX += cx;
       drawAlien(moveX, moveY);
-      StdDraw.pause(250);
+      StdDraw.show();
+      StdDraw.pause(100);
       StdDraw.clear(StdDraw.GRAY);
       drawGame();
       StdDraw.show();
       
       if(moveX == 530){
         moveY -= 50;
+        count++;
         cx = -10;
       }
       if(moveX == 30){
         moveY -= 50;
+        count++;
         cx = 10;
       }
     if (StdDraw.hasNextKeyTyped()) {
@@ -72,13 +82,9 @@ public class Bravo{
       System.exit(0);
     } 
          
-         if(moveY<100){
-           endGame();
-            System.exit(0);
-         }      
          
-         if(a == 'a'){
-           if(x>10){
+       if(a == 'a'){
+         if(x>10){
       x -= 10.0;
       StdDraw.clear(StdDraw.GRAY);
       drawGame();
@@ -94,8 +100,28 @@ public class Bravo{
       StdDraw.show();
            }
         }
+        if(a == 'z'){
+          if(z<90){
+          z += 5.0;
+      StdDraw.clear(StdDraw.GRAY);
+      drawGame();
+      StdDraw.show();
+          }
+        }
+      if(a == 'c'){
+          if(z>-90){
+          z -= 5.0;
+      StdDraw.clear(StdDraw.GRAY);
+      drawGame();
+      StdDraw.show();
+          }
+         
+         
+         }
     }  
   }
+  }
+    endGame();
   }
   
   public static void endGame(){
@@ -105,6 +131,8 @@ public class Bravo{
   
   
   }
+  
+  
   
   public static void main(String[] args){
     StdDraw.enableDoubleBuffering();
