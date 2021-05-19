@@ -34,7 +34,7 @@ public class Game {
   public void drawshooter() {  
     shooter.draw();
   }
-  public void drawEnemy() {
+  public void drawenemy() {
     if(intialize==0){
       count=-1;
       for(row=0;row<3;row++){
@@ -60,20 +60,20 @@ public class Game {
     
     getStateOfKeys();
     //horizontal movement
-    if (keyLeft && !keyRight &&  shooter.x>10){
+    if (keyLeft && !keyRight){
       shooter.vx = -10;
     }
-    else if (keyRight && !keyLeft && shooter.x<790){
+    else if (keyRight && !keyLeft){
       shooter.vx = +10;
     }
     else{
       shooter.vx = 0;
     }
     //rotation
-    if (keyRotLeft && !keyRotRight && shooter.Orien< 90){
+    if (keyRotLeft && !keyRotRight){
       shooter.changeOr(5);
     }
-    else if (keyRotRight && !keyRotLeft && shooter.Orien> -90){
+    else if (keyRotRight && !keyRotLeft){
       shooter.changeOr(-5);
     }
     else{
@@ -108,8 +108,8 @@ public class Game {
         double x = shooter.returnX0();
         double y = shooter.returnY0();
         shot[shotcount].setCoord(x,y);
-        double Orien = shooter.returnOr();
-        shot[shotcount].setSpeed((int)Orien);  
+        int Orien = shooter.returnOr();
+        shot[shotcount].setSpeed(Orien);  
       }
     }
     shots = shotcount;

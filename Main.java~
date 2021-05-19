@@ -1,0 +1,24 @@
+public class Main {
+    public static void main(String[] args) {
+
+        int dt = 20; // delay i.e. approx 50fps
+
+        Game game = new Game();
+
+        game.start();
+
+        while (game.running) {
+            StdDraw.clear();
+            game.drawenemy();
+            game.drawshooter();
+            game.update();
+            game.shotmake();
+            game.shotupdate();
+            game.collisiondec();
+            
+            
+            StdDraw.show();
+            StdDraw.pause(dt);
+        }
+    }
+}
