@@ -2,7 +2,7 @@ public class Shooter extends DefaultCritter {
 
     private static  double x0 = 400;
     private static  double y0 = 100;
-    private static  int Orien = 90;
+    int Orien = 0;
     
     public Shooter() {
         super(x0, y0);
@@ -10,15 +10,15 @@ public class Shooter extends DefaultCritter {
 
     @Override
     public void update() {
-        super.update();
+        super.update1();
     }
 
     @Override
     public void draw() {
         int radius = 10;
-        StdDraw.setPenColor(StdDraw.BLUE);
-        StdDraw.filledCircle(x, y, radius);
+        StdDraw.picture(x, y ,"ship.gif",Orien);
     }
+    
     public void changeOr(int Rot){
       if( (Orien<=0) && (Rot>=0) ){
        Orien=0; 
@@ -30,11 +30,17 @@ public class Shooter extends DefaultCritter {
         Orien = Orien + Rot;
         }
       }
+    
+  
+   
+    
+    
+    
     public double returnX0(){
-     return x0;
+     return x;
     }
     public double returnY0(){
-     return y0;
+     return y;
     }
     public int returnOr(){
      return Orien;

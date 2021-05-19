@@ -18,6 +18,9 @@ public class Game {
   int intialize = 0;
   int shots;
   
+  private long lastFire = 0;
+  private long firingInterval = 500;
+  
   public Game() {
     // Setup StdDraw Window
     StdDraw.enableDoubleBuffering();
@@ -103,20 +106,28 @@ public class Game {
   public void shotmake(){ 
     if(shotcount<500){
       if(shootbut==true){
+        if (System.currentTimeMillis() - lastFire < firingInterval) {
+          return;
+        }
+        
+        
         shotcount++;
         shot[shotcount] = new Shot();
         double x = shooter.returnX0();
         double y = shooter.returnY0();
         shot[shotcount].setCoord(x,y);
         double Orien = shooter.returnOr();
-        shot[shotcount].setSpeed((int)Orien);  
+        shot[shotcount].setSpeed((int)Orien);
+        shot[shotcount].returnOrien((int)Orien);
+        lastFire = System.currentTimeMillis();
       }
     }
     shots = shotcount;
     
     for(shots=shots;shots>0;shots--){
        shot[shots].draw();
-    }  
+    }
+    
   }
  
   public void shotupdate(){

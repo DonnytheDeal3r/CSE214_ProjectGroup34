@@ -2,7 +2,7 @@ public class Shot extends DefaultCritter{
       private static double x0 = 0;
       private static double y0 = 0;
       private int hp = 100;
-      
+      private int OrienS = 0;
     public Shot() {
         super(x0, y0);
        
@@ -19,7 +19,7 @@ public class Shot extends DefaultCritter{
     @Override
     public void draw() {
       if(isAlive() == true){
-        StdDraw.picture(x, y,"Shot.gif",shooter.Orien);
+        StdDraw.picture(x, y,"Shot.gif",OrienS);
       }
     }
      @Override
@@ -34,6 +34,13 @@ public class Shot extends DefaultCritter{
     public double returnY0(){
      return y0;
     }
+    
+    public void returnOrien(int Orien){
+    OrienS = Orien;
+    
+    }
+    
+    
     public void damage(double x0,double y0,double sx,double sy){
       if( ( ( sx < x0 + 5 ) && (sx > x0 - 5) ) && ( ( sy < y0 + 5 ) && (sy > y0 - 5) ) ){
       takeDamage(101); 

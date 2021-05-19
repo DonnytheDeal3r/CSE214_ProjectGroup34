@@ -20,19 +20,18 @@ public class Shooter extends DefaultCritter {
     }
     
     public void changeOr(int Rot){
-      if( (Orien<=0) && (Rot>=0) ){
-       Orien=0; 
+      if( (Orien<=-90) && (Rot>=0) ){
+       Orien=-90; 
        Orien = Orien + Rot;
-      }else if( (Orien>=180) && (Rot<=0) ){
-       Orien=180; 
+      }else if( (Orien>=90) && (Rot<=0) ){
+       Orien=90; 
        Orien = Orien + Rot;  
-      }else if((Orien>0) && (Orien<180)){
+      }else if((Orien>-90) && (Orien<90)){
         Orien = Orien + Rot;
         }
       }
+     
     
-  
-   
     
     
     
