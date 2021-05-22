@@ -1,4 +1,7 @@
-public class Game {
+import java.awt.Rectangle;
+
+
+public class Game extends Rectangle {
   
   boolean running = false;
   
@@ -17,6 +20,11 @@ public class Game {
   int count;
   int intialize = 0;
   int shots;
+  
+  private long lastFire = 0;
+  private long firingInterval = 500;
+  
+  //private List<shot> shots;
   
   public Game() {
     // Setup StdDraw Window
@@ -45,6 +53,8 @@ public class Game {
           double y0 = 799 - row*50 - 30;
           enemy[count].setCoord(x0,y0);
         }
+        enemy[0].setCoord(30,769);
+        
       }
       intialize = 1;
     }
@@ -103,20 +113,28 @@ public class Game {
   public void shotmake(){ 
     if(shotcount<500){
       if(shootbut==true){
+        if (System.currentTimeMillis() - lastFire < firingInterval) {
+          return;
+        }
+        
+        
         shotcount++;
         shot[shotcount] = new Shot();
         double x = shooter.returnX0();
         double y = shooter.returnY0();
         shot[shotcount].setCoord(x,y);
         double Orien = shooter.returnOr();
-        shot[shotcount].setSpeed((int)Orien);  
+        shot[shotcount].setSpeed((int)Orien);
+        shot[shotcount].returnOrien((int)Orien);
+        lastFire = System.currentTimeMillis();
       }
     }
     shots = shotcount;
     
     for(shots=shots;shots>0;shots--){
        shot[shots].draw();
-    }  
+    }
+    
   }
  
   public void shotupdate(){
@@ -126,6 +144,7 @@ public class Game {
     } 
   }
   public void collisiondec(){
+    /*
     for(count=0;count<18;count++){ 
          double enx0 = enemy[count].returnX0();
          double eny0 = enemy[count].returnY0();
@@ -136,7 +155,18 @@ public class Game {
          shot[shots].damage(enx0,eny0,sx0,sy0);
        }                               
       }
+    
+    for(count=0;count<18;count++){
+      for(shots=shots;shots>0;shots--){
+        if((shot[shotcount]).intersects(enemy[count])){
+          System.out.println("A");
+        }
+      }
     }
+    */
+  }
+  
+  
   
     
     

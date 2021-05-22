@@ -22,18 +22,54 @@ public class Object2D {
         vy += ay * dt;
         x += vx * dt + 0.5 * ax * dt * dt;
         y += vy * dt + 0.5 * ay * dt * dt;
-      if(x>=800){
+      if(x>=780){
         vx = -vx;
+        y -= 150;
       }
       if(y>=800){
         vy = -vy;
       }
-      if(x<=0){
+      if(x<=20){
         vx = -vx;
+        y -= 150;
       }
       if(y<=0){
         vy = -vy;
       }
+        
+    }
+    public void update1() {
+        double dt = 1;
+        vx += ax * dt;
+        vy += ay * dt;
+        x += vx * dt + 0.5 * ax * dt * dt;
+        y += vy * dt + 0.5 * ay * dt * dt;
+      if(x>=780){
+        vx = -vx;
+       
+      }
+      if(y>=800){
+        vy = -vy;
+      }
+      if(x<=20){
+        vx = -vx;
+       
+      }
+      if(y<=0){
+        vy = -vy;
+      }
+        
+    }
+    
+    
+    
+    public void update2() {
+        double dt = 1;
+        vx += ax * dt;
+        vy += ay * dt;
+        x += vx * dt + 0.5 * ax * dt * dt;
+        y += vy * dt + 0.5 * ay * dt * dt;
+      
         
     }
     

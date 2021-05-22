@@ -6,16 +6,18 @@ public class Object2D {
     double vy;
     double ax;
     double ay;
+    double angle;
 
-    public Object2D(double x0, double y0) {
+    public Object2D(double x0, double y0, double angle) {
         x = x0;
         y = y0;
         vx = 0;
         vy = 0;
         ax = 0;
         ay = 0;
+        angle = 0;
     }
-
+//enemy
     public void update() {
         double dt = 1;
         vx += ax * dt;
@@ -38,6 +40,7 @@ public class Object2D {
       }
         
     }
+    //shooter
     public void update1() {
         double dt = 1;
         vx += ax * dt;
@@ -62,7 +65,7 @@ public class Object2D {
     }
     
     
-    
+    //shot
     public void update2() {
         double dt = 1;
         vx += ax * dt;
@@ -70,11 +73,8 @@ public class Object2D {
         x += vx * dt + 0.5 * ax * dt * dt;
         y += vy * dt + 0.5 * ay * dt * dt;
       
-        
+   
     }
     
     
-    
-    
-
 }

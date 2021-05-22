@@ -3,7 +3,7 @@ public class Main {
 
         int dt = 20; // delay i.e. approx 50fps
         boolean keyQuit = false;
-       
+        boolean keyStart = false;
 
         Game game = new Game();
 
@@ -12,6 +12,11 @@ public class Main {
         
 
         while (game.running) {
+          keyStart = StdDraw.isKeyPressed(32);
+          do{
+            StdDraw.clear(StdDraw.GRAY);
+          }while(keyStart==true);
+          
             StdDraw.clear(StdDraw.GRAY);
             game.drawEnemy();
             game.drawshooter();
