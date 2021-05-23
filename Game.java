@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.awt.Rectangle;
+import java.util.Iterator;
 public class Game extends Rectangle{
   
     //running
@@ -26,12 +27,13 @@ public class Game extends Rectangle{
     int col;
     int count;
     int intialize = 0;
-    
+    int score;
+    int level = 1;
     //fire control
     private long lastFire = 0;
     private long firingInterval = 500;
     
-   
+    
     
     
     
@@ -51,8 +53,7 @@ public class Game extends Rectangle{
     };
     
 //----------(Draw)--------------------------------------------------------------------  
-    
-    //draw meun
+     //draw meun
     public void menu(){
       
       StdDraw.clear(StdDraw.GRAY); 
@@ -64,8 +65,11 @@ public class Game extends Rectangle{
       StdDraw.show();
     
     }
+     public void drawScore(){
+      StdDraw.setPenColor(StdDraw.BLUE);
+      StdDraw.text(90.0,780.0, "Score: "+score+"  Level:"+level);
     
-    
+    }
     
     
     
@@ -162,62 +166,57 @@ public class Game extends Rectangle{
         str.setSpeed();
       } 
     }
- //--------------(Collision)------------------------------------------------------------- 
-    public void collision(){
-      /*
-      if(shots1.size()>0){
-        for(int i = 0; i < enemylist.size(); i++){
-          for(int j = 0; j < shots1.size(); j ++){
-          if (shots1.get(i))
-          
-          }
-        
+ //--------------(Collision)----------------------------------------------------------------------------------------------    
+   //enemies hitscan
+     public void collision(){
+       Iterator itr = enemylist.iterator();
+      
+         while ( itr.hasNext() ){
+           Enemy emmy = (Enemy)itr.next();
+           double enx0 = emmy.getOGX();
+           double eny0 = emmy.getOGY();
+            Iterator iter = shots1.iterator();
+             while ( iter.hasNext() ){
+               Shot ITR = (Shot)iter.next();
+               double sy0 = ITR.getOGY();
+               double sx0 = ITR.getOGX();
+                if( ( ( sx0 < enx0 + 20 ) && (sx0 > enx0 - 20) ) && ( ( sy0 < eny0 + 20 ) && (sy0 > eny0 - 20 ) ) ){
+                 itr.remove();
+                 iter.remove();
+                  score = score +10;
+                }
+    
+             }
+         }
+     }
+     
+     
+     
+     
+     
+  //shot out of bounds
+    public void shotRemove(){
+      Iterator itr = shots1.iterator();
+      while (itr.hasNext()){
+        Shot ITR = (Shot)itr.next();
+        double y = ITR.getOGY();
+        double x = ITR.getOGX();
+        if(y>800.0){
+          itr.remove();
+          System.out.println(1);           
+        }else if( (x>800) || (x<0) ){
+          itr.remove();
+          System.out.println(1);           
+        }else if( (x>800) && (y>=800) ){
+          itr.remove();
+          System.out.println(1);          
+        }else if( (x<=0) && (y>=800) ){ 
+          itr.remove();
+          System.out.println(1);         
         }
-      
-      
-      
-      
-      }
-      */
-      
-      
-      
-      
-      for(Enemy str : enemylist){
-        double enx0 = str.getOGX();
-        double eny0 = str.getOGY();
-        for(Shot str1 : shots1){ 
-          double sx0 = str1.returnX0();
-          double sy0 = str1.returnY0();
-          if (sy0 <= (eny0 + 20) && (sy0 >= eny0 -20) && (sx0 >= enx0 - 20)
-                && sx0 <= (enx0 +20)){
-            str1.setHp(0);
-            str.setHp(0);
-            System.out.println("HIT");
-          
-          }
-        } 
-       
-       
-       
-       
-      }  
-      
-    
-    
-    
-    
-    
+      }   
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
  //--------------(Extra)-----------------------------------------------------------------       
     private void getStateOfKeys() {
       keyLeft = StdDraw.isKeyPressed(65);
@@ -226,29 +225,20 @@ public class Game extends Rectangle{
       keyRotLeft = StdDraw.isKeyPressed(81);
       shootbut = StdDraw.isKeyPressed(87);
     }
+    public int returnScore(){
+      return score;
+  
+
+    }
+
+
+
+//-----------------------------------(end)----------------------------------------------    
 
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 

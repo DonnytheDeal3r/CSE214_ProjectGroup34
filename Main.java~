@@ -19,14 +19,15 @@ public class Main {
             StdDraw.clear(StdDraw.GRAY);            
             game.initEnemy();
             game.shotmake();
+
             game.updateshooter();
-            game.updateshot();  
+            game.updateshot();
+            game.shotRemove();
             game.updateEnemy();  
             game.drawshooter();
             game.drawEnemies();
             game.drawshots();  
-            //game.
-            //game.
+            game.collision();           
             
             
             StdDraw.show();

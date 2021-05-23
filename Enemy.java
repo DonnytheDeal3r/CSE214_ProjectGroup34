@@ -2,7 +2,6 @@ public class Enemy extends DefaultCritter {
 
    private static double x0 = 0;
    private static double y0 = 0;
-   private int hp = 100;
    
     //enemy body
     public Enemy(double x0, double y0) {
@@ -21,10 +20,6 @@ public class Enemy extends DefaultCritter {
          StdDraw.picture(x,y ,"alien.gif");
       }
     }
-    public void setHp(int hp){
-        this.hp = hp;
-        
-      }
     
     @Override 
     public void takeDamage(int damage) {

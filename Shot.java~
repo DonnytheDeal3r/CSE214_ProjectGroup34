@@ -37,11 +37,10 @@ public class Shot extends DefaultCritter{
     
     
     
-    /*  public void damage(double x0,double y0,double sx,double sy){
+      public void damage(double x0,double y0,double sx,double sy){
         if( ( ( sx < x0 + 5 ) && (sx > x0 - 5) ) && ( ( sy < y0 + 5 ) && (sy > y0 - 5) ) ){
         takeDamage(101); 
       
         }
       }
-      */
 }
