@@ -1,8 +1,8 @@
 public class DefaultCritter extends Object2D implements Critter {
 
     private int hp;
-    public DefaultCritter(double x, double y) {
-        super(x, y);
+    public DefaultCritter(double x, double y, double angle) {
+        super(x, y, angle);
         hp = 100;
     }
 

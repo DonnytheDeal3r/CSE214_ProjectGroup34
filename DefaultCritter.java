@@ -25,5 +25,8 @@ public class DefaultCritter extends Object2D implements Critter {
     public void draw() {
         
     }
-    
+    public double reANg(){
+     double angle2 = reAng();
+     return angle2;
+    }
 }

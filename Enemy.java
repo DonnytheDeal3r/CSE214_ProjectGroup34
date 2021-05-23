@@ -3,7 +3,7 @@ public class Enemy extends DefaultCritter {
       private static double x0 = 0;
       private static double y0 = 0;
 
-    public Enemy() {
+    public Enemy(double x0, double y0) {
         super(x0, y0, 90);
         vx = -1;
     }

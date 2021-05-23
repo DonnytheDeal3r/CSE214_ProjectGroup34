@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Shooter extends DefaultCritter {
 
-    private static  double x0 = 400;
-    private static  double y0 = 100;
+    private final static  double x0 = 400;
+    private final static  double y0 = 100;
     int Orien = 0;
     
   private ArrayList<Shot> shots = new ArrayList<Shot>();

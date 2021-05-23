@@ -1,11 +1,16 @@
+import java.util.ArrayList;
+
 public class Shooter extends DefaultCritter {
 
     private static  double x0 = 400;
     private static  double y0 = 100;
     int Orien = 0;
     
+  private ArrayList<Shot> shots = new ArrayList<Shot>();
+    
+    
     public Shooter() {
-        super(x0, y0);
+        super(x0, y0, 90);
     }
 
     @Override
@@ -30,10 +35,30 @@ public class Shooter extends DefaultCritter {
         Orien = Orien + Rot;
         }
       }
+    
+    public ArrayList<Shot> getShots(){
+    return shots;
+  }
+  
+  
+   //shoot your shot
+    
+  public void shotmake(){ 
+     double x = returnX0();
+     double y = returnY0();
+     double Orien = returnOr();
+    
      
+     //shots.add(new Shot(x,y,(double)Orien));
+     /*Shot.sety0(y);
+     Shot.setx0(x);
+     shots.add(Shot);
+     */
     
-    
-    
+  }
+   
+     
+  
     
     public double returnX0(){
      return x;

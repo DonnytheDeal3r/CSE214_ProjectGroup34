@@ -6,7 +6,7 @@ public class Object2D {
     double vy;
     double ax;
     double ay;
-    double angle;
+    double angleref;
 
     public Object2D(double x0, double y0, double angle) {
         x = x0;
@@ -15,7 +15,7 @@ public class Object2D {
         vy = 0;
         ax = 0;
         ay = 0;
-        angle = 0;
+        angleref = angle;
     }
 //enemy
     public void update() {
@@ -74,6 +74,10 @@ public class Object2D {
         y += vy * dt + 0.5 * ay * dt * dt;
       
    
+    }
+    public double reAng(){
+     double angle1 = angleref;
+     return angle1;
     }
     
     

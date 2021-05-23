@@ -1,5 +1,5 @@
 import java.awt.Rectangle;
-
+import java.util.ArrayList;
 
 public class Game extends Rectangle {
   
@@ -13,7 +13,7 @@ public class Game extends Rectangle {
   
   Shooter shooter = new Shooter();
   Enemy enemy[] = new Enemy[18];
-  Shot shot[] = new Shot[500];
+  Shot shot[] = new Shot[50000];
   int shotcount;
   int row;
   int col;
@@ -23,8 +23,8 @@ public class Game extends Rectangle {
   
   private long lastFire = 0;
   private long firingInterval = 500;
-  
-  //private List<shot> shots;
+ 
+  static ArrayList<Shot> shots1 = new ArrayList<Shot>();
   
   public Game() {
     // Setup StdDraw Window
@@ -109,8 +109,37 @@ public class Game extends Rectangle {
     keyRotLeft = StdDraw.isKeyPressed(81);
     shootbut = StdDraw.isKeyPressed(87);
   }
+  
+  
+  
+  
    //shoot your shot
   public void shotmake(){ 
+    if(shootbut==true){
+      if (System.currentTimeMillis() - lastFire < firingInterval) {
+        return;
+      }
+      double x = shooter.returnX0();
+      double y = shooter.returnY0();
+      double Orien = shooter.returnOr();
+      shots1.add( new Shot(x,y,(int)Orien));
+      
+      
+       
+     
+      }
+    for(Shot str: shots1){ 
+        str.setSpeed();
+    } 
+     for(Shot str: shots1){
+        str.draw();
+    }
+   // lastFire = System.currentTimeMillis();
+    
+    
+    
+    /*r
+     * 
     if(shotcount<500){
       if(shootbut==true){
         if (System.currentTimeMillis() - lastFire < firingInterval) {
@@ -134,14 +163,21 @@ public class Game extends Rectangle {
     for(shots=shots;shots>0;shots--){
        shot[shots].draw();
     }
-    
+    */
   }
- 
   public void shotupdate(){
+    
+     for(Shot str: shots1){
+       str.update();
+    }
+    
+    /*
      shots = shotcount;
       for(shots=shots;shots>0;shots--){
        shot[shots].update();
+       
     } 
+    */
   }
   public void collisiondec(){
     /*

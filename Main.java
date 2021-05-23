@@ -1,3 +1,5 @@
+
+
 public class Main {
     public static void main(String[] args) {
 
@@ -18,12 +20,16 @@ public class Main {
           }while(keyStart==true);
           
             StdDraw.clear(StdDraw.GRAY);
-            game.drawEnemy();
-            game.drawshooter();
             game.update();
             game.shotmake();
             game.shotupdate();
+            game.drawEnemy();
+            game.drawshooter();
+              game.shotDraw();
             game.collisiondec();
+            StdDraw.setPenColor(StdDraw.BLUE);
+            StdDraw.text(25.0,780.0, "Score:");
+    
             
             
             StdDraw.show();
