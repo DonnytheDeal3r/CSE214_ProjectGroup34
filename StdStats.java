@@ -531,18 +531,3 @@ public final class StdStats {
         StdOut.printf("      varp %10.3f\n", varp(a));
     }
 }
-/*if(intialize==0){
-      for(count=0;count<18;count++){
-      enemy[count] = new Enemy();
-      }
-      count=0;
-      for(row=0;row<3;row++){
-        for(col=0;col<6;col++){
-        count++;  
-        enemy[count] = new Enemy();
-        enemy[count].x0 = col*50 + 30;
-        enemy[count].x0 = row*50 + 30; 
-        }
-      }
-      intialize = 1;
-      }*/

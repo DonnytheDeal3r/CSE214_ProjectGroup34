@@ -1,8 +1,10 @@
 public class Enemy extends DefaultCritter {
 
-      private static double x0 = 0;
-      private static double y0 = 0;
-
+   private static double x0 = 0;
+   private static double y0 = 0;
+   private int hp = 100;
+   
+    //enemy body
     public Enemy(double x0, double y0) {
         super(x0, y0, 90);
         vx = -1;
@@ -15,25 +17,32 @@ public class Enemy extends DefaultCritter {
 
     @Override
     public void draw() {
-      if(isAlive() == true){
-        StdDraw.picture(x,y ,"alien.gif");
+      if(isAlive()==true){
+         StdDraw.picture(x,y ,"alien.gif");
       }
     }
-    //setter
-    public void setCoord(double XCoord,double YCoord){
-      this.x0 = XCoord;
-      this.y0 = YCoord;
-    }
-    public void damage(double x0,double y0,double sx,double sy){
-      if( ( ( sx < x0 + 5 ) && (sx > x0 - 5) ) && ( ( sy < y0 + 5 ) && (sy > y0 - 5) ) ){
-      takeDamage(101); 
-      
+    public void setHp(int hp){
+        this.hp = hp;
+        
       }
+    
+    @Override 
+    public void takeDamage(int damage) {
+        super.takeDamage(damage);
     }
-    public double returnX0(){
-     return x0;
+    
+    //return y-coord
+    public double getOGY(){
+     double Y0 = super.returnY0();
+     return Y0;
     }
-    public double returnY0(){
-     return y0;
+    
+    //return x-coord
+    public double getOGX(){
+     double X0 = super.returnX0();
+     return X0;
     }
+    
+    
+    
 }

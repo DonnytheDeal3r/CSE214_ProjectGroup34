@@ -1,110 +1,123 @@
-
-import java.awt.Rectangle;
 import java.util.ArrayList;
-
-public class Game extends Rectangle {
+import java.awt.Rectangle;
+public class Game extends Rectangle{
   
-  boolean running = false;
-  boolean keyLeft = false;
-  boolean keyRight = false;
-  boolean keyRotRight = false;
-  boolean keyRotLeft = false;
-  boolean shootbut = false;
-  
-  Shooter shooter = new Shooter();
-  Enemy enemy[] = new Enemy[18];
-  Shot shot[] = new Shot[50000];
-  int shotcount;
-  int row;
-  int col;
-  int count;
-  int intialize = 0;
-  int shots;
-  
-  private long lastFire = 0;
-  private long firingInterval = 500;
- 
-  static ArrayList<Shot> shots1 = new ArrayList<Shot>();
-  static ArrayList<Enemy> enemylist = new ArrayList<Enemy>();
-  public Game() {
-    // Setup StdDraw Window
-    StdDraw.enableDoubleBuffering();
-    StdDraw.clear();
-    StdDraw.setCanvasSize(800, 800);
-    StdDraw.setXscale(0, 800);
-    StdDraw.setYscale(0, 800); 
+    //running
+    boolean running = false;
+    
+    //keys
+    boolean keyLeft = false;
+    boolean keyRight = false;
+    boolean keyRotRight = false;
+    boolean keyRotLeft = false;
+    boolean shootbut = false;
+    
+    //shooter make
+    Shooter shooter = new Shooter();
+    
+    //arraylist for enemies
+    static ArrayList<Enemy> enemylist = new ArrayList<Enemy>();  
+    
+    //arraylist for shots
+    static ArrayList<Shot> shots1 = new ArrayList<Shot>();
+    
+    //usefull ints
+    int row;
+    int col;
+    int count;
+    int intialize = 0;
+    
+    //fire control
+    private long lastFire = 0;
+    private long firingInterval = 500;
+    
    
-  }
-  
-  public void start() {
-    running = true;
-  }
-  
-  public void drawshooter() {  
-    shooter.draw();
-  }
-  
-  public void initEnemy() {
-    if(intialize == 1)
-      for(row=0;row<3;row++){
-        for(col=0;col<6;col++){
-          count++;
-          double x0 = 0.0 + col*50 + 30;
-          double y0 = 799.0 - row*50 - 30;
-
-          enemylist.add(new Enemy(x0,y0));
-
-
-          //enemy[count].setCoord(x0,y0);
-        }
-      }
-     intialize--;
-  }
-  
-  
-  public void drawEnemy() {
-     for(Enemy str : enemylist){
-      str.draw();
+    
+    
+    
+//-------------------------------------------------------------------------------------   
+    //Game body
+    public Game() {
+        // Setup StdDraw Window
+        StdDraw.enableDoubleBuffering();
+        StdDraw.clear();
+        StdDraw.setCanvasSize(800, 800);
+        StdDraw.setXscale(0, 800);
+        StdDraw.setYscale(0, 800);
     }
-   }
-   public void updateEnemy() { 
-
-           for(Enemy str : enemylist){
-      str.update();
-    } 
+    //startbutton
+    public void start() {
+        running = true;
+    };
+    
+//----------(Draw)--------------------------------------------------------------------  
+    
+    //draw meun
+    public void menu(){
+      
+      StdDraw.clear(StdDraw.GRAY); 
+      StdDraw.setPenColor(StdDraw.YELLOW);  
+      StdDraw.text(400.0,300.0, "Shoot(w)");
+      StdDraw.text(400.0,270.0, "Rotate: Left(a), Stop(s), Right(d)");
+      StdDraw.text(400.0,240.0, "Move: Left(z), Stop(x), Right(c)");
+      StdDraw.text(400.0,210.0, "Quit(q), Screencap(p)");
+      StdDraw.show();
+    
+    }
     
     
     
     
-    /*
-    if(intialize==0){
-      count=-1;
-      for(row=0;row<3;row++){
-        for(col=0;col<6;col++){
-          count++;  
-          enemy[count] = new Enemy();
-          double x0 = 0 + col*50 + 30;
-          double y0 = 799 - row*50 - 30;
-          enemy[count].setCoord(x0,y0);
-        }
-        enemy[0].setCoord(30,769);
+    
+    //drawshooter
+    public void drawshooter() {
+        shooter.draw();
+    }
+    //draw enemies
+    public void drawEnemies() {
+      for(Enemy str : enemylist){
+        str.draw();
+      }    
+    }  
+    //draw shots
+    public void drawshots() {
+      for(Shot str: shots1){
+        str.draw();
+      }   
+    }  
+//-------------(intialize enemies)-----------------------------------------------------       
         
+    //intialize enemies
+    public void initEnemy() {
+      if(intialize == 0)
+        for(row=0;row<3;row++){
+        for(col=0;col<6;col++){
+          count++;           
+          double x0 = 0 + col*50 + 30;
+          double y0 = 799 - row*50 - 30;         
+          enemylist.add(new Enemy(x0,y0));
+        }
       }
-      intialize = 1;
+     intialize++;
+  }   
+ 
+//----------(update)--------------------------------------------------------------------   
+       
+  //update enemies
+    public void updateEnemy() { 
+      for(Enemy str : enemylist){
+        str.update();
+      }  
     }
-    count=-1;
-    for(row=0;row<3;row++){
-      for(col=0;col<6;col++){
-        count++;  
-        enemy[count].draw();
+  //update shots
+    public void updateshot(){
+      for(Shot str: shots1){
+        str.update();
       }
     }
-  }
-  
-  
-  */
-   }
-  public void update() {
+    
+  //update shooter
+    public void updateshooter() {
     
     getStateOfKeys();
     //horizontal movement
@@ -127,84 +140,127 @@ public class Game extends Rectangle {
     else{
       shooter.changeOr(0);
     }
-  
-//update enemy
-    /*
-    count=-1;
-    for(row=0;row<3;row++){
-      for(col=0;col<6;col++){
-        count++;       
-        enemy[count].update();
-      }
-    }
+    //updateshooter
     shooter.update();
-    */
-  }
-  
-  private void getStateOfKeys() {
-    keyLeft = StdDraw.isKeyPressed(65);
-    keyRight = StdDraw.isKeyPressed(68);
-    keyRotRight = StdDraw.isKeyPressed(69);
-    keyRotLeft = StdDraw.isKeyPressed(81);
-    shootbut = StdDraw.isKeyPressed(87);
-  }
-
-   //shoot your shot
-  public void shotmake(){ 
-    if(shootbut==true){
-      if (System.currentTimeMillis() - lastFire < firingInterval) {
-        return;
-      }
-      double x = shooter.returnX0();
-      double y = shooter.returnY0();
-      double Orien = shooter.returnOr();
-      shots1.add( new Shot(x,y,(int)Orien));
-      lastFire = System.currentTimeMillis();
-      }
-    for(Shot str: shots1){ 
-        str.setSpeed();
-    } 
-     
-  }
-  
-  public void shotDraw(){
-  for(Shot str: shots1){
-        str.draw();
+       
     }
 
-  }
-  
-  public void shotupdate(){
-    
-     for(Shot str: shots1){
-       str.update();
-    }
-  }
-  public void collisiondec(){
-    /*
-    for(count=0;count<18;count++){ 
-         double enx0 = enemy[count].returnX0();
-         double eny0 = enemy[count].returnY0();
-       for(shots=shots;shots>0;shots--){                               
-         double sx0 = shot[shots].returnX0();
-         double sy0 = shot[shots].returnY0();
-         enemy[count].damage(enx0,eny0,sx0,sy0);
-         shot[shots].damage(enx0,eny0,sx0,sy0);
-       }                               
-      }
-    
-    for(count=0;count<18;count++){
-      for(shots=shots;shots>0;shots--){
-        if((shot[shotcount]).intersects(enemy[count])){
-          System.out.println("A");
+//---------(intialize shot)--------------------------------------------------------------  
+    public void shotmake(){ 
+      getStateOfKeys();
+      if(shootbut==true){
+        if (System.currentTimeMillis() - lastFire < firingInterval) {
+          return;
         }
+        double x = shooter.returnX0();
+        double y = shooter.returnY0();
+        double Orien = shooter.returnOr();
+        lastFire = System.currentTimeMillis();
+        shots1.add( new Shot(x,y,(int)Orien));    
       }
+      for(Shot str: shots1){ 
+        str.setSpeed();
+      } 
     }
-    */
-  }
-  
-  
-  
+ //--------------(Collision)------------------------------------------------------------- 
+    public void collision(){
+      /*
+      if(shots1.size()>0){
+        for(int i = 0; i < enemylist.size(); i++){
+          for(int j = 0; j < shots1.size(); j ++){
+          if (shots1.get(i))
+          
+          }
+        
+        }
+      
+      
+      
+      
+      }
+      */
+      
+      
+      
+      
+      for(Enemy str : enemylist){
+        double enx0 = str.getOGX();
+        double eny0 = str.getOGY();
+        for(Shot str1 : shots1){ 
+          double sx0 = str1.returnX0();
+          double sy0 = str1.returnY0();
+          if (sy0 <= (eny0 + 20) && (sy0 >= eny0 -20) && (sx0 >= enx0 - 20)
+                && sx0 <= (enx0 +20)){
+            str1.setHp(0);
+            str.setHp(0);
+            System.out.println("HIT");
+          
+          }
+        } 
+       
+       
+       
+       
+      }  
+      
     
     
-  }
+    
+    
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+ //--------------(Extra)-----------------------------------------------------------------       
+    private void getStateOfKeys() {
+      keyLeft = StdDraw.isKeyPressed(65);
+      keyRight = StdDraw.isKeyPressed(68);
+      keyRotRight = StdDraw.isKeyPressed(69);
+      keyRotLeft = StdDraw.isKeyPressed(81);
+      shootbut = StdDraw.isKeyPressed(87);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

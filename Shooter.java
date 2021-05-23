@@ -1,14 +1,9 @@
-import java.util.ArrayList;
-
 public class Shooter extends DefaultCritter {
 
-    private final static  double x0 = 400;
-    private final static  double y0 = 100;
+    private static final double x0 = 400;
+    private static final double y0 = 100;
     int Orien = 0;
-    
-  private ArrayList<Shot> shots = new ArrayList<Shot>();
-    
-    
+    //body of shooter
     public Shooter() {
         super(x0, y0, 90);
     }
@@ -20,10 +15,9 @@ public class Shooter extends DefaultCritter {
 
     @Override
     public void draw() {
-        int radius = 10;
         StdDraw.picture(x, y ,"ship.gif",Orien);
     }
-    
+    //Orientation of ship 
     public void changeOr(int Rot){
       if( (Orien<=-90) && (Rot>=0) ){
        Orien=-90; 
@@ -35,38 +29,44 @@ public class Shooter extends DefaultCritter {
         Orien = Orien + Rot;
         }
       }
-    
-    public ArrayList<Shot> getShots(){
-    return shots;
-  }
-  
-  
-   //shoot your shot
-    
-  public void shotmake(){ 
-     double x = returnX0();
-     double y = returnY0();
-     double Orien = returnOr();
-    
-     
-     //shots.add(new Shot(x,y,(double)Orien));
-     /*Shot.sety0(y);
-     Shot.setx0(x);
-     shots.add(Shot);
-     */
-    
-  }
-   
-     
-  
-    
+    //return x-coord
     public double returnX0(){
      return x;
     }
+    //return y-coord
     public double returnY0(){
      return y;
     }
+    //return orientation
     public int returnOr(){
      return Orien;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

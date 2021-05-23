@@ -2,7 +2,7 @@ public class Shot extends DefaultCritter{
   static final private double x0=0;
   static final private double y0=0;
   static private double Orient;
-     // private int hp = 100;
+     private int hp = 100;
        
       public Shot(double x, double y, double angle) {
         super(x, y, angle);
@@ -25,6 +25,10 @@ public class Shot extends DefaultCritter{
           StdDraw.picture(x, y,"Shot.gif",Orient);
         }
       }
+      public void setHp(int hp){
+        this.hp = hp;
+        
+      }
     
      
       public double returnX0(){
@@ -37,10 +41,11 @@ public class Shot extends DefaultCritter{
     
     
     
-      public void damage(double x0,double y0,double sx,double sy){
+    /*  public void damage(double x0,double y0,double sx,double sy){
         if( ( ( sx < x0 + 5 ) && (sx > x0 - 5) ) && ( ( sy < y0 + 5 ) && (sy > y0 - 5) ) ){
         takeDamage(101); 
       
         }
       }
+      */
 }

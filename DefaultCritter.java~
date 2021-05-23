@@ -1,20 +1,22 @@
 public class DefaultCritter extends Object2D implements Critter {
 
     private int hp;
-    public DefaultCritter(double x, double y, double angle) {
-        super(x, y, angle);
+
+    public DefaultCritter(double x, double y) {
+        super(x, y);
         hp = 100;
     }
 
     public boolean isAlive() {
-      if(hp <= 0){
-        return false;
+      if(hp < 0){
+      return false;
+      }else{
+       return true; 
       }
-      return true;
     }
 
     public void takeDamage(int damage) {
-        hp = hp - damage;
+        hp -= damage;
     }
 
     @Override
@@ -25,5 +27,10 @@ public class DefaultCritter extends Object2D implements Critter {
     public void draw() {
         
     }
+    public double returnY0(){
+     double coy = super.getY();
+     return coy;
+    }
+    
     
 }
